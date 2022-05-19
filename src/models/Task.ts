@@ -10,4 +10,9 @@ export default class Task {
 
     @Column()
     completed: boolean;
+
+    constructor(description: string, completed: boolean) {
+        this.completed = completed;
+        this.description = description;
+    }
 }
