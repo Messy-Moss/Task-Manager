@@ -1,6 +1,7 @@
 import { AppDataSource, env } from './data-source';
 import express, { json } from 'express';
 import taskRouter from './routes/task';
+import cors from 'cors';
 
 const app = express();
 
@@ -9,6 +10,11 @@ const main = async () => {
         await AppDataSource.initialize();
 
         console.log('successfuly connected to db');
+
+        app.use(cors({
+            origin: 'http://localhost:8080',
+            methods: '*'
+        }));
 
         app.use(json());
 

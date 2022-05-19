@@ -38,11 +38,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const data_source_1 = require("./data-source");
 const express_1 = __importStar(require("express"));
 const task_1 = __importDefault(require("./routes/task"));
+const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield data_source_1.AppDataSource.initialize();
         console.log('successfuly connected to db');
+        app.use((0, cors_1.default)({
+            origin: 'http://localhost:8080',
+            methods: '*'
+        }));
         app.use((0, express_1.json)());
         app.use('/tasks', task_1.default);
         app.listen(data_source_1.env.PORT, () => {
